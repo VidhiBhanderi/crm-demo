@@ -5,6 +5,8 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import useLanguage from '@/locale/useLanguage';
 
 export default function ResetPasswordForm() {
+  const translate = useLanguage();
+  
   return (
     <>
       <Form.Item
@@ -12,6 +14,19 @@ export default function ResetPasswordForm() {
         rules={[
           {
             required: true,
+            message: 'Please input your password!',
+          },
+          {
+            min: 8,
+            message: 'Password must be at least 8 characters long',
+          },
+          {
+            max: 50,
+            message: 'Password must be less than 50 characters long',
+          },
+          {
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+            message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
           },
         ]}
       >

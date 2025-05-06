@@ -64,6 +64,19 @@ export default function AdminForm({ isUpdateForm = false, isForAdminOwner = fals
           rules={[
             {
               required: true,
+              message: 'Please input your password!',
+            },
+            {
+              min: 8,
+              message: 'Password must be at least 8 characters long',
+            },
+            {
+              max: 50,
+              message: 'Password must be less than 50 characters long',
+            },
+            {
+              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+              message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
             },
           ]}
         >

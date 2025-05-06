@@ -37,7 +37,17 @@ const resetPassword = async (req, res, { userModel }) => {
 
   // validate
   const objectSchema = Joi.object({
-    password: Joi.string().required(),
+    password: Joi.string()
+      .min(8)
+      .max(50)
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/)
+      .required()
+      .messages({
+        'string.min': 'Password must be at least 8 characters long',
+        'string.max': 'Password must be less than 50 characters long',
+        'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+        'any.required': 'Password is required',
+      }),
     userId: Joi.string().required(),
     resetToken: Joi.string().required(),
   });
